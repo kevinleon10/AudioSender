@@ -3,7 +3,6 @@ package sockets;
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 
-import javax.sound.sampled.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
@@ -67,7 +66,6 @@ public class Receiver implements Runnable{
          */
         @Override
         public void run() {
-            BufferedReader input = null;
             byte byteArray[] = new byte[1024];
             BufferedInputStream bufferedInputStream = null;
             try {
@@ -87,7 +85,6 @@ public class Receiver implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            file = file.substring(file.indexOf("\\")+1, file.length());
             BufferedOutputStream bufferedOutputStream = null;
             try {
                 bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file));
@@ -113,16 +110,14 @@ public class Receiver implements Runnable{
                 e.printStackTrace();
             }
             BasicPlayer player = new BasicPlayer();
-            String songName = "strings.wav";
-            String pathToMp3 = System.getProperty("user.dir") +"/"+ songName;
             try {
-                player.open(new URL("file:///" + pathToMp3));
+                player.open(new URL("file:" + file));
                 player.play();
             } catch (BasicPlayerException | MalformedURLException e) {
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(5*1000);
+                Thread.sleep(15*1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

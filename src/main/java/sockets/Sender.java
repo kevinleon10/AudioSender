@@ -47,7 +47,7 @@ public class Sender implements Runnable{
                 clientSocket = new Socket(host, port);
 
                 //Para enviar audio
-                file = new File("C:\\strings.wav");
+                file = new File("slr.wav");
                 bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
                 bufferedOutputStream = new BufferedOutputStream(clientSocket.getOutputStream());
 
